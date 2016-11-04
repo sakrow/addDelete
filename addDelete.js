@@ -61,7 +61,6 @@
 
             if (count == 1) {
                 var idSave = $(this).parents('[data-adition]').attr('data-adition');
-                console.log('dentro id=' + idSave);
                 saveElement(idSave, element);
             }
 
@@ -80,10 +79,6 @@
         var element = $('[data-adition="' + adition + '"]');
         var newElement = '';
         var count = element.children('[data-delete]').length;
-
-        console.log(count);
-        console.log(adition);
-        console.log(saves);
 
         if (count == 0) {
             newElement = saves[adition];
@@ -105,7 +100,6 @@
         var saveElement = element.clone();
         resetForm(saveElement);
         saves[id] = saveElement;
-        console.log(saves);
     }
 
     function resetForm(form) {
