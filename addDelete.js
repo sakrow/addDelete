@@ -85,13 +85,14 @@
         }
 
         if (count !== 0) {
-            newElement = element.children().first().clone();
+            newElement = element.children('[data-delete]').last().clone();
         }
 
         var id = getNext($('[data-delete]:not(button)'));
         newElement.attr('data-delete', id);
         newElement.find('button.deleteButton').attr('data-delete', id);
         resetForm(newElement);
+        changeArrayIndex(newElement)
         newElement.insertBefore(element.children('button'));
         buttonDeleteActionAdd();
     }
@@ -105,6 +106,14 @@
     function resetForm(form) {
         form.find('input:text, input:password, input:file, select, textarea').val('');
         form.find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
+    }
+
+    function changeArrayIndex(newElement) {
+        newElement.find('[name]').each(function(){
+            this.name = this.name.replace(/\[(\d+)\]/, function(str,p1){
+                return '[' + (parseInt(p1,10)+1) + ']';
+            });
+        });
     }
 
 }(jQuery));
